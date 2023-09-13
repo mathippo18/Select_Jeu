@@ -1,6 +1,8 @@
 import os
 import re
+import platform
 ###Code###
+system_exploit = platform.system()
 format = "[0-9]"
 def selection():
     print("Bonjour sur la séléction de jeu de Mathéo")
@@ -38,8 +40,14 @@ def selection():
             cmd = "python3 Jeux/Hangman/hangman.py"
             os.system(cmd)
         if jeu == 7:
-            cmd = "cd Jeux/Casse_brique/ && casse_brique.html && cd ../.."
-            os.system(cmd)
+            if system_exploit == "Windows":
+                cmd = "cd Jeux/Casse_brique/ && casse_brique.html && cd ../.."
+                os.system(cmd)
+            elif system_exploit == "Linux":
+                cmd = "x-www-browser Jeux/Casse_brique/casse_brique.html"
+                os.system(cmd)
+            else:
+            	print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
         if jeu == 8:
             cmd = "python3 Jeux/python-tetris/tetris.py"
             os.system(cmd)
@@ -47,8 +55,15 @@ def selection():
             cmd = "python3 Jeux/Sudoku/GUI.py"
             os.system(cmd)
         if jeu == 10:
-            cmd = "start microsoftedge.exe https://github.com/mathippo18"
-            os.system(cmd)
+            if system_exploit == "Windows":
+                cmd = "start microsoftedge.exe https://github.com/mathippo18"
+                os.system(cmd)
+            elif system_exploit == "Linux":
+                cmd = "x-www-browser https://github.com/mathippo18"
+                os.system(cmd)
+            else:
+                print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
+            
 
 
 jeu = None

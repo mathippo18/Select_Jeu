@@ -1,7 +1,4 @@
-#########################################################
-## File Name: hangman.py                               ##
-## Description: Starter for Hangman project - ICS3U    ##
-#########################################################
+
 import pygame
 import random
 
@@ -10,9 +7,7 @@ try:
     winHeight = 500
     winWidth = 1000
     win=pygame.display.set_mode((winWidth,winHeight))
-    #---------------------------------------#
-    # initialize global variables/constants #
-    #---------------------------------------#
+
     BLACK = (0,0, 0)
     WHITE = (255,255,255)
     RED = (255,0, 0)

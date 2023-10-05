@@ -1,18 +1,23 @@
-"""
-Snake Eater
-Made with PyGame
-"""
-
+import sqlite3
+import sys
 import pygame, sys, time, random
 
 
+for arg in sys.argv:
+    id = sys.argv[1]
+
+
+puissance = 0
+difficulty = 0
 # Difficulty settings
 # Easy      ->  10
 # Medium    ->  25
 # Hard      ->  40
 # Harder    ->  60
 # Impossible->  120
-difficulty = 25
+while puissance < 1 or puissance > 121:
+    puissance = int(input("Quel est la difficulté souhaitée (entre 1 et 120)"))
+difficulty = puissance
 
 # Window size
 frame_size_x = 720
@@ -61,6 +66,18 @@ score = 0
 
 # Game Over
 def game_over():
+    sqliteConnection = sqlite3.connect('DataBase/connect.db')
+    cursor = sqliteConnection.cursor()
+    query = '''Select * From HighScore Where Identifiant = ?;'''
+    cursor.execute(query,(id,))
+    output = cursor.fetchall()
+    for row in output:
+        if int(row[2]) < int(score) :
+            query = '''Update HighScore Set Snake = ? Where Identifiant = ?;'''
+            cursor.execute(query,(score, id))
+    sqliteConnection.commit()
+    cursor.close()
+    sqliteConnection.close()  
     my_font = pygame.font.SysFont('times new roman', 90)
     game_over_surface = my_font.render('YOU DIED', True, red)
     game_over_rect = game_over_surface.get_rect()
@@ -72,6 +89,7 @@ def game_over():
     time.sleep(3)
     pygame.quit()
     sys.exit()
+
 
 
 # Score
@@ -96,11 +114,11 @@ while True:
         # Whenever a key is pressed down
         elif event.type == pygame.KEYDOWN:
             # W -> Up; S -> Down; A -> Left; D -> Right
-            if event.key == pygame.K_UP or event.key == ord('w'):
+            if event.key == pygame.K_UP or event.key == ord('z'):
                 change_to = 'UP'
             if event.key == pygame.K_DOWN or event.key == ord('s'):
                 change_to = 'DOWN'
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
+            if event.key == pygame.K_LEFT or event.key == ord('q'):
                 change_to = 'LEFT'
             if event.key == pygame.K_RIGHT or event.key == ord('d'):
                 change_to = 'RIGHT'
@@ -168,3 +186,5 @@ while True:
     pygame.display.update()
     # Refresh rate
     fps_controller.tick(difficulty)
+
+

@@ -1,6 +1,5 @@
-# Main File to Run the Game From
-# Tutorial: https://youtu.be/o-6pADy5Mdg
 
+import sqlite3
 import pygame, sys
 from Player import Player
 import Obstacle
@@ -8,10 +7,13 @@ from Alien import Alien, Extra
 from Laser import Laser
 from random import choice, randint
 import os
+import time
 
 
-# File Importing (Changes Directory to Where the File is Saved)
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+for arg in sys.argv:
+    id = sys.argv[1]
 
 
 class Game:
@@ -166,6 +168,19 @@ class Game:
             screen.blit(self.live_surf, (x, 8))
 
         if self.lives <= 0:
+            sqliteConnection = sqlite3.connect('DataBase/connect.db')
+            cursor = sqliteConnection.cursor()
+            query = '''Select * From HighScore Where Identifiant = ?;'''
+            cursor.execute(query,(id))
+            output = cursor.fetchall()
+            for row in output:
+                if int(row[1]) < int(self.score) :
+                    query = '''Update HighScore Set "Space Invaders" = ? Where Identifiant = ?;'''
+                    cursor.execute(query,(self.score, id))
+            sqliteConnection.commit()
+            cursor.close()
+            sqliteConnection.close()
+            time.sleep(1)
             pygame.quit()
             sys.exit()
 
@@ -176,9 +191,25 @@ class Game:
 
     def victory_message(self):
         if not self.aliens.sprites():
-            victory_surf = self.font.render("You Won!", False, "White")
+            victory_surf = self.font.render("Gagné", False, "White")
             victory_rect = victory_surf.get_rect(center = (screen_width / 2, screen_height/ 2))
             screen.blit(victory_surf, victory_rect)
+            sqliteConnection = sqlite3.connect('DataBase/connect.db')
+            cursor = sqliteConnection.cursor()
+            query = '''Select * From HighScore Where Identifiant = ?;'''
+            cursor.execute(query,(id,))
+            output = cursor.fetchall()
+            for row in output:
+                if int(row[1]) < int(self.score) :
+                    query = '''Update HighScore Set "Space Invaders" = ? Where Identifiant = ?;'''
+                    cursor.execute(query,(self.score, id))
+            sqliteConnection.commit()
+            cursor.close()
+            sqliteConnection.close()
+            time.sleep(3)
+            pygame.quit()
+            sys.exit()
+
 
     def run(self):
         # Draw and Update All Sprite Groups
@@ -245,3 +276,5 @@ if __name__ == "__main__":
 
         pygame.display.flip()
         clock.tick(60)
+
+

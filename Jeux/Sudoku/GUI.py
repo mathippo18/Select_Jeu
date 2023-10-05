@@ -1,5 +1,5 @@
 import pygame
-from sudokuSolverAlgo import *
+#from sudokuSolverAlgo import *
 from chooseLevel import *
 import time
 

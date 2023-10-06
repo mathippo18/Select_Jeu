@@ -128,16 +128,25 @@ def selection():
         if jeu == 12:
             sqliteConnection = sqlite3.connect('DataBase/connect.db')
             cursor = sqliteConnection.cursor()
-            query = '''Delete From Id WHERE Pseudo=? ; '''
-            query2 =''' Delete From HighScore WHERE Identifiant=? ;'''
-            cursor.execute(query,(id,))
-            sqliteConnection.commit()
-            cursor.execute(query2,(id,))
-            sqliteConnection.commit()
-            cursor.close()
-            sqliteConnection.close()
-            print("Au revoir et bonne continuation")
-            quit()
+            password = input("Quel est votre mot de passe ? \n")
+            hash_object = hashlib.sha3_512(password.encode())
+            hex_digest = hash_object.hexdigest()
+            query = '''Select * From Id WHERE Pseudo=? AND Password=?;'''
+            cursor.execute(query,(id, hex_digest))
+            output = cursor.fetchall()
+            if len(output) == 0 : 
+                print("Mot de passe incorrect")
+            else:
+                query = '''Delete From Id WHERE Pseudo=? ; '''
+                query2 =''' Delete From HighScore WHERE Identifiant=? ;'''
+                cursor.execute(query,(id,))
+                sqliteConnection.commit()
+                cursor.execute(query2,(id,))
+                sqliteConnection.commit()
+                cursor.close()
+                sqliteConnection.close()
+                print("Au revoir et bonne continuation")
+                quit()
             
 
 

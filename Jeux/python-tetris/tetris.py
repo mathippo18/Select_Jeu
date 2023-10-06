@@ -215,7 +215,7 @@ class Tetris(object):
                     cursor.execute(query,(self.score, id))
             sqliteConnection.commit()
             cursor.close()
-            sqliteConnection.close()"
+            sqliteConnection.close()
         if down_board or not can_move_down:     
             self.new_block = True
 

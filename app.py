@@ -104,7 +104,8 @@ def selection():
     print(" - 13 Supprimer un compte ")
     jeu_souhaité = input("Vous voulez jouer a quel jeu ? : ")
     test = re.search(format, jeu_souhaité)
-    while test == False:
+    while test == None:
+        print("Veuillez renseigner le numéro lié au jeu/fonction")
         jeu_souhaité = input("Vous voulez jouer a quel jeu ? : ")
         test = re.search(format, jeu_souhaité)
     jeu = int(jeu_souhaité)

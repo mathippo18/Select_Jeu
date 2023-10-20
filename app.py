@@ -85,7 +85,7 @@ elif connect == "2":
 
 ###Code###
 system_exploit = platform.system()
-format = "[0-1][0-3]"
+format = "[0-9]*"
 def selection():
     print("Bonjour sur la séléction de jeu de Mathéo")
     print("Vous avez le choix entre 9 jeux :")

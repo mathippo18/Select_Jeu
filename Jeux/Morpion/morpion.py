@@ -214,12 +214,12 @@ def Jeu(g):
             l=Actions(g)
             if l!=None:
                 print('Actions possibles : ' + str(l))
-                a=int(input('choix colonne : '))
-                b=int(input('choix ligne : '))
+                a=int(input('choix LIGNE : '))
+                b=int(input('choix COLONNE : '))
                 while(((a,b) not in l ) or (type(a) != int) or (type(b) != int)):
                     print("Oops, vos coordonnées ne sont pas valides... essayez a nouveau !")
-                    a=int(input('choix LIGNE 1 : '))
-                    b=int(input('choix COLONNE 2 : ')) 
+                    a=int(input('choix LIGNE : '))
+                    b=int(input('choix COLONNE : ')) 
                 Result(g,(a,b))
                 currentplayer=jIa
                 Jeu(g)

@@ -1,4 +1,4 @@
-
+import time
 import copy
 from sudokuGenerator import *
 

@@ -218,8 +218,8 @@ def Jeu(g):
                 b=int(input('choix COLONNE : '))
                 while(((a,b) not in l ) or (type(a) != int) or (type(b) != int)):
                     print("Oops, vos coordonnées ne sont pas valides... essayez a nouveau !")
-                    a=int(input('choix LIGNE : '))
-                    b=int(input('choix COLONNE : ')) 
+                    a=int(input('choix COLONNE : '))
+                    b=int(input('choix LIGNE : ')) 
                 Result(g,(a,b))
                 currentplayer=jIa
                 Jeu(g)

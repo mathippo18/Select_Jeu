@@ -18,4 +18,8 @@ Bienvenue Utilisateur, Ceci est une sélection de jeu crée en Python !!!!!!
 
 
 ## Comment y accéder
-Vous pouvez y acceder via le fichier batch "lancement.exe"
+--Windows --
+Vous pouvez y acceder via le fichier "lancement.exe" présent dans dossier "dist"
+--Linux--
+--MacOS--
+Le programme n'est pas pris en charge

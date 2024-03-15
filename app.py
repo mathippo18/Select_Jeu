@@ -7,10 +7,18 @@ import time
 import filecmp
 import pwinput
 
-os.system("pip freeze > ../Conf/config.txt")
-comparaison = filecmp.cmp("../Conf/config.txt","../Conf/requirements.txt")
-if comparaison == False:
-    os.system("pip install -r ../Conf/requirements.txt")
+###Code###
+system_exploit = platform.system()
+if system_exploit == "Windows":
+    os.system("pip freeze > ../Conf/config.txt")
+    comparaison = filecmp.cmp("../Conf/config.txt","../Conf/requirements.txt")
+    if comparaison == False:
+        os.system("pip install -r ../Conf/requirements.txt")
+elif system_exploit == "Linux":
+    os.system("pip freeze > ../Conf/config.txt")
+    comparaison = filecmp.cmp("../Conf/config.txt","../Conf/requirements_linux.txt")
+    if comparaison == False:
+        os.system("pip install -r ../Conf/requirements_linux.txt")
 
 
 ###Database###
@@ -84,8 +92,7 @@ elif connect == "2":
             sqliteConnection.close() 
 
 
-###Code###
-system_exploit = platform.system()
+
 format = "[0-9]*"
 def selection():
     print("Bonjour sur la séléction de jeu de Mathéo")

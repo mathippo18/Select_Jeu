@@ -168,7 +168,7 @@ class Game:
             screen.blit(self.live_surf, (x, 8))
 
         if self.lives <= 0:
-            sqliteConnection = sqlite3.connect('DataBase/connect.db')
+            sqliteConnection = sqlite3.connect('../DataBase/connect.db')
             cursor = sqliteConnection.cursor()
             query = '''Select * From HighScore Where Identifiant = ?;'''
             cursor.execute(query,(id))
@@ -194,7 +194,7 @@ class Game:
             victory_surf = self.font.render("Gagné", False, "White")
             victory_rect = victory_surf.get_rect(center = (screen_width / 2, screen_height/ 2))
             screen.blit(victory_surf, victory_rect)
-            sqliteConnection = sqlite3.connect('DataBase/connect.db')
+            sqliteConnection = sqlite3.connect('../DataBase/connect.db')
             cursor = sqliteConnection.cursor()
             query = '''Select * From HighScore Where Identifiant = ?;'''
             cursor.execute(query,(id,))

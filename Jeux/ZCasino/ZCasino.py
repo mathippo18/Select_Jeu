@@ -53,7 +53,7 @@ try:
                         else:
                                 print("Au revoir et à bientôt au ZCasino ")
                                 j=0
-                                sqliteConnection = sqlite3.connect('DataBase/connect.db')
+                                sqliteConnection = sqlite3.connect('../DataBase/connect.db')
                                 cursor = sqliteConnection.cursor()
                                 query = '''Select * From HighScore  Where Identifiant = ?;'''
                                 cursor.execute(query,(id,))

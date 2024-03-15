@@ -5,11 +5,12 @@ import sqlite3
 import hashlib
 import time
 import filecmp
+import pwinput
 
-os.system("pip freeze > config.txt")
-comparaison = filecmp.cmp("config.txt","requirements.txt")
+os.system("pip freeze > ../Conf/config.txt")
+comparaison = filecmp.cmp("../Conf/config.txt","../Conf/requirements.txt")
 if comparaison == False:
-    os.system("pip install -r requirements.txt")
+    os.system("pip install -r ../Conf/requirements.txt")
 
 
 ###Database###
@@ -21,10 +22,10 @@ while intconnect >= 3:
     intconnect = int(connect)
 if connect == '1':
     id = input("Quel est votre identifiant ? \n")
-    password = input("Quel est votre mot de passe ? \n")
+    password = pwinput.pwinput(mask='*')
     hash_object = hashlib.sha3_512(password.encode())
     hex_digest = hash_object.hexdigest()
-    sqliteConnection = sqlite3.connect('DataBase/connect.db')
+    sqliteConnection = sqlite3.connect('../DataBase/connect.db')
     cursor = sqliteConnection.cursor()
     query = '''Select * From Id WHERE Pseudo=? AND Password=?;'''
     cursor.execute(query,(id, hex_digest))
@@ -32,7 +33,7 @@ if connect == '1':
     while len(output) == 0 : 
         print("Pseudo ou Mot de passe incorrect")
         id = input("Quel est votre identifiant ? \n")
-        password = input("Quel est votre mot de passe ? \n")
+        password = pwinput.pwinput(mask='*')
         hash_object = hashlib.sha3_512(password.encode())
         hex_digest = hash_object.hexdigest()
         query = '''Select * From Id WHERE Pseudo=? AND Password = ?;'''
@@ -44,10 +45,10 @@ if connect == '1':
     sqliteConnection.close()      
 elif connect == "2":
     id = input("Quel est votre identifiant ? \n")
-    password = input("Quel est votre mot de passe ? \n")
+    password = pwinput.pwinput(mask='*')
     hash_object = hashlib.sha3_512(password.encode())
     hex_digest = hash_object.hexdigest()
-    sqliteConnection = sqlite3.connect('DataBase/connect.db')
+    sqliteConnection = sqlite3.connect('../DataBase/connect.db')
     cursor = sqliteConnection.cursor()
     query = '''Select * From Id WHERE Pseudo=? ;'''
     cursor.execute(query,(id,))
@@ -64,10 +65,10 @@ elif connect == "2":
     else:
         print("Nom utilisateur, veuillez en prendre un autre !")
         id = input("Quel est votre identifiant ? \n")
-        password = input("Quel est votre mot de passe ? \n")
+        password = pwinput.pwinput(mask='*')
         hash_object = hashlib.sha3_512(password.encode())
         hex_digest = hash_object.hexdigest()
-        sqliteConnection = sqlite3.connect('DataBase/connect.db')
+        sqliteConnection = sqlite3.connect('../DataBase/connect.db')
         cursor = sqliteConnection.cursor()
         query = '''Select * From Id WHERE Pseudo=? ;'''
         cursor.execute(query,(id,))
@@ -110,41 +111,41 @@ def selection():
         test = re.search(format, jeu_souhaité)
     jeu = int(jeu_souhaité)
     if jeu == 1:
-        cmd = "python3 Jeux/ZCasino/ZCasino.py "+ id
+        cmd = "python3 ../Jeux/ZCasino/ZCasino.py "+ id
         os.system(cmd)
     if jeu == 2:
-        cmd = "python3 Jeux/reversi/reversi.py"
+        cmd = "python3 ../Jeux/reversi/reversi.py"
         os.system(cmd)
     if jeu == 3:
-        cmd = "python3 Jeux/Space_Invaders/Code/Main.py "+ id
+        cmd = "python3 ../Jeux/Space_Invaders/Code/Main.py "+ id
         os.system(cmd)
     if jeu == 4:
-        cmd = "python3 Jeux/Morpion/morpion.py"
+        cmd = "python3 ../Jeux/Morpion/morpion.py"
         os.system(cmd) 
     if jeu == 5:
-        cmd = "python3 Jeux/Snake/snake.py "+ id
+        cmd = "python3 ../Jeux/Snake/snake.py "+ id
         os.system(cmd)
     if jeu == 6:
-        cmd = "python3 Jeux/Hangman/hangman.py"
+        cmd = "python3 ../Jeux/Hangman/hangman.py"
         os.system(cmd)
     if jeu == 7:
         if system_exploit == "Windows":
-            cmd = "cd Jeux/Casse_brique/ && casse_brique.html && cd ../.."
+            cmd = "cd ../Jeux/Casse_brique/ && casse_brique.html && cd ../.."
             os.system(cmd)
         elif system_exploit == "Linux":
-            cmd = "x-www-browser Jeux/Casse_brique/casse_brique.html"
+            cmd = "x-www-browser ../Jeux/Casse_brique/casse_brique.html"
             os.system(cmd)
         else:
             print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
     if jeu == 8:
-        cmd = "python3 Jeux/python-tetris/tetris.py "+ id
+        cmd = "python3 ../Jeux/python-tetris/tetris.py "+ id
         os.system(cmd)
     if jeu == 9:
-        cmd = "python3 Jeux/Sudoku/GUI.py"
+        cmd = "python3 ../Jeux/Sudoku/GUI.py"
         os.system(cmd)
     if jeu == 10:
         if system_exploit == "Windows":
-            cmd = "start microsoftedge.exe https://github.com/mathippo18"
+            cmd = "start msedge.exe https://github.com/mathippo18"
             os.system(cmd)
         elif system_exploit == "Linux":
             cmd = "x-www-browser https://github.com/mathippo18"
@@ -152,7 +153,7 @@ def selection():
         else:
             print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
     if jeu == 11:
-        sqliteConnection = sqlite3.connect('DataBase/connect.db')
+        sqliteConnection = sqlite3.connect('../DataBase/connect.db')
         cursor = sqliteConnection.cursor()
         query = '''Select * From HighScore WHERE Identifiant=? ; '''
         cursor.execute(query,(id,))
@@ -168,9 +169,9 @@ def selection():
         cursor.close()
         sqliteConnection.close()
     if jeu == 12:
-        sqliteConnection = sqlite3.connect('DataBase/connect.db')
+        sqliteConnection = sqlite3.connect('../DataBase/connect.db')
         cursor = sqliteConnection.cursor()
-        password = input("Quel est votre mot de passe actuel ? \n")
+        password = pwinput.pwinput(mask='*')
         hash_object = hashlib.sha3_512(password.encode())
         hex_digest = hash_object.hexdigest()
         query = '''Select * From Id WHERE Pseudo=? AND Password=?;'''
@@ -182,11 +183,11 @@ def selection():
             cursor.close()
             sqliteConnection.close()
         else:
-            new_password = input("Quel est votre nouveau mot de passe ? \n")
-            new_password_confirm = input("Confirmez votre nouveau mot de passe ? \n")
+            new_password = pwinput.pwinput(prompt='Quel est votre nouveau mot de passe:',mask='*')
+            new_password_confirm = pwinput.pwinput(prompt='Confirmez votre nouveau mot de passe: ', mask='*')
             while new_password != new_password_confirm:
-                new_password = input("Quel est votre nouveau mot de passe ? \n")
-                new_password_confirm = input("Confirmez votre nouveau mot de passe ? \n")
+                new_password = pwinput.pwinput('Quel est votre nouveau mot de passe:', mask='*')
+                new_password_confirm = pwinput.pwinput(prompt='Confirmez votre nouveau mot de passe: ',mask='*')
             new_hash_object = hashlib.sha3_512(new_password.encode())
             new_hex_digest = new_hash_object.hexdigest()
             query = '''UPDATE Id SET Password = ? WHERE Pseudo=? AND Password = ?; '''
@@ -195,9 +196,9 @@ def selection():
             cursor.close()
             sqliteConnection.close()
     if jeu == 13:
-        sqliteConnection = sqlite3.connect('DataBase/connect.db')
+        sqliteConnection = sqlite3.connect('../DataBase/connect.db')
         cursor = sqliteConnection.cursor()
-        password = input("Quel est votre mot de passe ? \n")
+        password = pwinput.pwinput(prompt='Quel est votre mot de passe : ', mask='*')
         hash_object = hashlib.sha3_512(password.encode())
         hex_digest = hash_object.hexdigest()
         query = '''Select * From Id WHERE Pseudo=? AND Password=?;'''

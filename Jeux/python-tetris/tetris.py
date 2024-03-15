@@ -130,7 +130,7 @@ class Tetris(object):
         while True: 
             for ev in pygame.event.get():
                 if ev.type == pygame.QUIT or (ev.type == pygame.KEYDOWN and ev.unicode == 'q'):
-                    sqliteConnection = sqlite3.connect('DataBase/connect.db')
+                    sqliteConnection = sqlite3.connect('../DataBase/connect.db')
                     cursor = sqliteConnection.cursor()
                     query = '''Select * From HighScore Where Identifiant = ?;'''
                     cursor.execute(query,(id))
@@ -204,7 +204,7 @@ class Tetris(object):
         self.active_block.restore()
         if not can_move_down and (self.start_x == self.active_block.x and self.start_y == self.active_block.y):
             self.game_over = True
-            sqliteConnection = sqlite3.connect('DataBase/connect.db')
+            sqliteConnection = sqlite3.connect('../DataBase/connect.db')
             cursor = sqliteConnection.cursor()
             query = '''Select * From HighScore Where Identifiant = ?;'''
             cursor.execute(query,(id))

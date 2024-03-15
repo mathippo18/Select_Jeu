@@ -66,7 +66,7 @@ score = 0
 
 # Game Over
 def game_over():
-    sqliteConnection = sqlite3.connect('DataBase/connect.db')
+    sqliteConnection = sqlite3.connect('../DataBase/connect.db')
     cursor = sqliteConnection.cursor()
     query = '''Select * From HighScore Where Identifiant = ?;'''
     cursor.execute(query,(id,))

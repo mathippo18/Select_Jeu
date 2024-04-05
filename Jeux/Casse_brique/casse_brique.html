@@ -3,15 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <title>Casse brique de Mathéo</title>
+    <!-- Style CSS pour le canvas -->
     <style>* { padding: 0; margin: 0; } canvas { background: #eee; display: block; margin: 0 auto; }</style>
 </head>
 <body>
 
+<!-- Canvas pour le jeu -->
 <canvas id="myCanvas" width="480" height="320"></canvas>
 
 <script>
+    // Récupération du canvas et du contexte
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+
+    // Définition des variables du jeu
     var ballRadius = 10;
     var x = canvas.width/2;
     var y = canvas.height-30;
@@ -32,6 +37,7 @@
     var score = 0;
     var lives = 3;
 
+    // Tableau pour stocker les briques
     var bricks = [];
     for(var c=0; c<brickColumnCount; c++) {
         bricks[c] = [];
@@ -40,10 +46,12 @@
         }
     }
 
+    // Gestionnaires d'événements clavier et souris
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
     document.addEventListener("mousemove", mouseMoveHandler, false);
 
+    // Fonction pour gérer l'appui sur une touche du clavier
     function keyDownHandler(e) {
         if(e.code  == "ArrowRight") {
             rightPressed = true;
@@ -52,6 +60,8 @@
             leftPressed = true;
         }
     }
+
+    // Fonction pour gérer le relâchement d'une touche du clavier
     function keyUpHandler(e) {
         if(e.code == 'ArrowRight') {
             rightPressed = false;
@@ -60,12 +70,16 @@
             leftPressed = false;
         }
     }
+
+    // Fonction pour gérer le mouvement de la souris
     function mouseMoveHandler(e) {
         var relativeX = e.clientX - canvas.offsetLeft;
         if(relativeX > 0 && relativeX < canvas.width) {
             paddleX = relativeX - paddleWidth/2;
         }
     }
+
+    // Fonction pour détecter les collisions avec les briques
     function collisionDetection() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
@@ -85,6 +99,7 @@
         }
     }
 
+    // Fonction pour dessiner la balle
     function drawBall() {
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -92,6 +107,8 @@
         ctx.fill();
         ctx.closePath();
     }
+
+    // Fonction pour dessiner la raquette
     function drawPaddle() {
         ctx.beginPath();
         ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
@@ -99,6 +116,8 @@
         ctx.fill();
         ctx.closePath();
     }
+
+    // Fonction pour dessiner les briques
     function drawBricks() {
         for(var c=0; c<brickColumnCount; c++) {
             for(var r=0; r<brickRowCount; r++) {
@@ -116,26 +135,35 @@
             }
         }
     }
+
+    // Fonction pour dessiner le score
     function drawScore() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Score: "+score, 8, 20);
     }
+
+    // Fonction pour dessiner le nombre de vies
     function drawLives() {
         ctx.font = "16px Arial";
         ctx.fillStyle = "#0095DD";
         ctx.fillText("Lives: "+lives, canvas.width-65, 20);
     }
 
+    // Fonction pour dessiner et mettre à jour le jeu
     function draw() {
+        // Efface le canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Dessine les briques, la balle, la raquette, le score et le nombre de vies
         drawBricks();
         drawBall();
         drawPaddle();
         drawScore();
         drawLives();
+        // Vérifie les collisions
         collisionDetection();
 
+        // Déplacement de la balle et rebond sur les bords
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
             dx = -dx;
         }
@@ -162,6 +190,7 @@
             }
         }
 
+        // Déplacement de la raquette
         if(rightPressed && paddleX < canvas.width-paddleWidth) {
             paddleX += 7;
         }
@@ -169,11 +198,14 @@
             paddleX -= 7;
         }
 
+        // Déplacement de la balle
         x += dx;
         y += dy;
+        // Demande d'animation de la prochaine trame
         requestAnimationFrame(draw);
     }
 
+    // Appel initial de la fonction pour démarrer le jeu
     draw();
 </script>
 

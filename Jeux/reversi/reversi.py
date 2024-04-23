@@ -33,7 +33,7 @@ class ReversiGame:
                 if self.is_valid_move(i, j, self.player):
                     self.button_grid[i][j].config(text=self.symbols[self.board[i][j]], bg="lightgreen")
                 else:
-                    self.button_grid[i][j].config(text=self.symbols[self.board[i][j]], bg="SystemButtonFace")
+                    self.button_grid[i][j].config(text=self.symbols[self.board[i][j]], bg="grey")
 
     def play_move(self, i, j):
         if self.board[i][j] != 0:

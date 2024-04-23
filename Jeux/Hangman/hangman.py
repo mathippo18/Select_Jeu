@@ -19,13 +19,12 @@ try:
     btn_font = pygame.font.SysFont("arial", 20)
     guess_font = pygame.font.SysFont("monospace", 24)
     lost_font = pygame.font.SysFont('arial', 45)
-<<<<<<< HEAD
-=======
+
     word = ''
     buttons = []
     guessed = []
     hangmanPics = [pygame.image.load('../Jeux/Hangman/hangman0.png'), pygame.image.load('../Jeux/Hangman/hangman1.png'), pygame.image.load('../Jeux/Hangman/hangman2.png'), pygame.image.load('../Jeux/Hangman/hangman3.png'), pygame.image.load('../Jeux/Hangman/hangman4.png'), pygame.image.load('../Jeux/Hangman/hangman5.png'), pygame.image.load('../Jeux/Hangman/hangman6.png')]
->>>>>>> 3e19a71e5d3b5c5ffd355c71485829beb33fd71c
+
 
     word = ''  # Mot à deviner
     buttons = []  # Liste des boutons pour les lettres
@@ -60,10 +59,9 @@ try:
         pygame.display.update()
 
     def randomWord():
-<<<<<<< HEAD
+
         """Choisit un mot aléatoire depuis un fichier."""
-=======
->>>>>>> 3e19a71e5d3b5c5ffd355c71485829beb33fd71c
+
         file = open('../Jeux/Hangman/words.txt')
         f = file.readlines()
         i = random.randrange(0, len(f) - 1)

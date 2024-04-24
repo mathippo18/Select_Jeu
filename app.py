@@ -410,12 +410,17 @@ try:
     login_button = tk.Button(root, text="Login", command=show_login_window)
     login_button.pack(pady=20)
 
-    selection_button = tk.Button(root, text="Game Selection", command=selection)
+    selection_button = tk.Button(root, text="Game Selection", command=lambda: selection() if is_logged_in else messagebox.showerror("Erreur", "Vous devez vous connecter afin d'accéder aux jeux"))
     selection_button.pack(pady=20)
+
+    root.mainloop()
 
     root.mainloop()
 except ModuleNotFoundError:
     config()
+    #...
+
+    # Initialize Tkinter
     root = tk.Tk()
     root.title("Game Launcher")
 
@@ -423,7 +428,7 @@ except ModuleNotFoundError:
     login_button = tk.Button(root, text="Login", command=show_login_window)
     login_button.pack(pady=20)
 
-    selection_button = tk.Button(root, text="Game Selection", command=selection)
+    selection_button = tk.Button(root, text="Game Selection", command=lambda: selection() if is_logged_in else messagebox.showerror("Erreur", "Vous devez vous connecter afin d'accéder aux jeux"))
     selection_button.pack(pady=20)
 
     root.mainloop()

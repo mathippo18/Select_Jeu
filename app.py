@@ -367,39 +367,40 @@ def delete_account():
 
 # Function to launch selected game
 def launch_game(game):
-    if game == "Une roulette de casino":
-        cmd = "python3 ../Jeux/ZCasino/ZCasino.py "+ id
-        os.system(cmd)
-    elif game == "Othello":
-        cmd = "python3 ../Jeux/reversi/reversi.py"
-        os.system(cmd)
-    elif game == "Space invaders":
-        cmd = "python3 ../Jeux/Space_Invaders/Code/Main.py "+ id
-        os.system(cmd)
-    elif game == "Morpion":
-        cmd = "python3 ../Jeux/Morpion/morpion.py"
-        os.system(cmd)
-    elif game == "Snake Eater":
-        cmd = "python3 ../Jeux/Snake/snake.py "+ id
-        os.system(cmd)
-    elif game == "Un pendu":
-        cmd = "python3 ../Jeux/Hangman/hangman.py"
-        os.system(cmd)
-    elif game == "Casse brique":
-        if system_exploit == "Windows":
-            cmd = "cd ../Jeux/Casse_brique/ && casse_brique.html && cd ../.."
+    match game:
+        case "Une roulette de casino":
+            cmd = "python3 ../Jeux/ZCasino/ZCasino.py "+ id
             os.system(cmd)
-        elif system_exploit == "Linux":
-            cmd = "x-www-browser ../Jeux/Casse_brique/casse_brique.html"
+        case "Othello":
+            cmd = "python3 ../Jeux/reversi/reversi.py"
             os.system(cmd)
-        else:
-            print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
-    elif game == "Tetris":
-        cmd = "python3 ../Jeux/python-tetris/tetris.py "+ id
-        os.system(cmd)
-    elif game == "sudoku":
-        cmd = "python3 ../Jeux/Sudoku/GUI.py"
-        os.system(cmd)
+        case "Space invaders":
+            cmd = "python3 ../Jeux/Space_Invaders/Code/Main.py "+ id
+            os.system(cmd)
+        case "Morpion":
+            cmd = "python3 ../Jeux/Morpion/morpion.py"
+            os.system(cmd)
+        case "Snake Eater":
+            cmd = "python3 ../Jeux/Snake/snake.py "+ id
+            os.system(cmd)
+        case "Un pendu":
+            cmd = "python3 ../Jeux/Hangman/hangman.py"
+            os.system(cmd)
+        case "Casse brique":
+            if system_exploit == "Windows":
+                cmd = "cd ../Jeux/Casse_brique/ && casse_brique.html && cd ../.."
+                os.system(cmd)
+            elif system_exploit == "Linux":
+                cmd = "x-www-browser ../Jeux/Casse_brique/casse_brique.html"
+                os.system(cmd)
+            else:
+                print("Ce programme n'a pas été testé sur MacOS, il sera donc pas lancé")
+        case "Tetris":
+            cmd = "python3 ../Jeux/python-tetris/tetris.py "+ id
+            os.system(cmd)
+        case "sudoku":
+            cmd = "python3 ../Jeux/Sudoku/GUI.py"
+            os.system(cmd)
 
 # Initialize Tkinter
 try:
@@ -418,8 +419,6 @@ try:
     root.mainloop()
 except ModuleNotFoundError:
     config()
-    #...
-
     # Initialize Tkinter
     root = tk.Tk()
     root.title("Game Launcher")

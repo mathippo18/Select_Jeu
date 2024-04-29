@@ -22,10 +22,10 @@ Bienvenue Utilisateur, Ceci est une sélection de jeu crée en Python !!!!!!
 Vous pouvez y acceder via le fichier "app.exe" présent dans dossier "dist"  
 --Linux--
 Vous pouvez y acceder via le fichier "app.sh" présent dans dossier "dist"  
-Veuillez au préalable utiliser la commande "sudo apt install xdotool" dans le terminal avant de lancer le programme !!  
 --MacOS--  
 Le programme n'est pas pris en charge  
 ## Les fonctions possibles 
 Jouer
 Créer / supprimer un compte
 Modifier un mot de passe
+Consulter les meilleurs scores des utilisateurs

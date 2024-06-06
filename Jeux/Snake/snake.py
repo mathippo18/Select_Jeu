@@ -1,22 +1,33 @@
 import sqlite3
 import sys
 import pygame, sys, time, random
-
+import tkinter as tk
 
 for arg in sys.argv:
-    id = sys.argv[1]
+    id = "Matheo"
 
 
 puissance = 0
 difficulty = 0
-# Difficulty settings
-# Easy      ->  10
-# Medium    ->  25
-# Hard      ->  40
-# Harder    ->  60
-# Impossible->  120
+
+
 while puissance < 1 or puissance > 121:
-    puissance = int(input("Quel est la difficulté souhaitée (entre 1 et 120)"))
+    root = tk.Tk()
+    root.title("Difficulté")
+    Diff_label = tk.Label(root, text="Difficulty settings : \n Easy -> 10\n Medium -> 25\n Hard -> 40\n Harder -> 60\n Impossible -> 120")
+    Diff_label.pack(pady=5)
+
+    Diff_entry = tk.Entry(root)
+    Diff_entry.pack(pady=5)
+    def getdiff():
+        global puissance
+        puissance = Diff_entry.get()
+        root.destroy()
+        puissance = int(puissance)
+    # Create buttons for login and game selection
+    Diff = tk.Button(root, text="Valider la difficulté", command=getdiff)
+    Diff.pack(pady=20)
+    root.mainloop()
 difficulty = puissance
 
 # Window size

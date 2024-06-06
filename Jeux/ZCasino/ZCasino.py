@@ -16,7 +16,7 @@ class RouletteGame:
         self.mise_entry = tk.Entry(master)
         self.mise_entry.pack()
 
-        self.label_numero = tk.Label(master, text="Numéro misé (entre 0 et 50) ou couleur (rouge/noir):")
+        self.label_numero = tk.Label(master, text="Numéro misé (entre 0 et 36) ou couleur (rouge/noir):")
         self.label_numero.pack()
         self.numero_entry = tk.Entry(master)
         self.numero_entry.pack()
@@ -39,18 +39,18 @@ class RouletteGame:
 
         if numero_mise.isdigit():
             numero_mise = int(numero_mise)
-            if not 0 <= numero_mise <= 50:
-                messagebox.showerror("Erreur", "Le numéro misé doit être entre 0 et 50.")
+            if not 0 <= numero_mise <= 36:
+                messagebox.showerror("Erreur", "Le numéro misé doit être entre 0 et 36.")
                 return
             couleur_gagnante = "N/A"
         elif numero_mise in ["rouge", "noir"]:
-            couleur_gagnante = random.choice(["rouge", "noir"])
+            couleur_gagnante = numero_mise
             numero_mise = None
         else:
-            messagebox.showerror("Erreur", "Le numéro ou la couleur misé doit être un nombre entre 0 et 50 ou 'rouge'/'noir'.")
+            messagebox.showerror("Erreur", "Le numéro ou la couleur misé doit être un nombre entre 0 et 36 ou 'rouge'/'noir'.")
             return
 
-        numero_gagnant = random.randint(0, 50)
+        numero_gagnant = random.randint(0,36)
         couleur_gagnante_numero = self.get_numero_couleur(numero_gagnant)
         messagebox.showinfo("Résultat", "Le numéro gagnant est le {} ({})".format(numero_gagnant, couleur_gagnante_numero))
 
@@ -65,8 +65,9 @@ class RouletteGame:
             gain = -mise
 
         self.solde += gain
-        if self.solde < 0:
-            self.solde = 0
+        if self.solde < 0 or self.solde == 0:
+             messagebox.showinfo("Fauché", "Félicitations ! Vous êtes fauché...BYE !")
+             exit()
         self.label_solde.config(text="Solde: ${}".format(self.solde))
 
     def get_numero_couleur(self, numero):

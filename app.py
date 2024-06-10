@@ -138,19 +138,18 @@ try:
 	# Function to handle additional options
 	def handle_additional_option(option):
 		if option == "Visiter mon github":
-			url = "https://github.com/mathippo18"
-			os.system(f"start {url}")
-		elif option == "Voir vos meilleurs scores":
-			show_high_scores()
-		elif option == "Modifier le mot de passe":
-			change_password()
-		elif option == "Supprimer un compte":
 			if system_exploit == "Windows":
 				cmd = "start microsoftedge.exe https://github.com/mathippo18"
 				os.system(cmd)
 			elif system_exploit == "Linux":
 				cmd = "x-www-browser https://github.com/mathippo18"
 				os.system(cmd)
+		elif option == "Voir vos meilleurs scores":
+			show_high_scores()
+		elif option == "Modifier le mot de passe":
+			change_password()
+		elif option == "Supprimer un compte":
+			delete_account()
 
 	# Function to show high scores
 	def show_high_scores():

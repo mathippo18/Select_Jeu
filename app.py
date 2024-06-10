@@ -145,7 +145,12 @@ try:
 		elif option == "Modifier le mot de passe":
 			change_password()
 		elif option == "Supprimer un compte":
-			delete_account()
+			if system_exploit == "Windows":
+				cmd = "start microsoftedge.exe https://github.com/mathippo18"
+				os.system(cmd)
+			elif system_exploit == "Linux":
+				cmd = "x-www-browser https://github.com/mathippo18"
+				os.system(cmd)
 
 	# Function to show high scores
 	def show_high_scores():
